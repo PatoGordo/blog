@@ -54,6 +54,17 @@ export class SignIn {
           required
         />
         
+        <label class="osr" for="name" v-if="!isSignIn">Nome do seu perfil</label>
+        <input
+          v-if="!isSignIn"
+          class="outlined"
+          id="name"
+          type="text"
+          placeholder="Nome do seu perfil"
+          v-model="authStore.displayName"
+          required
+        />
+        
         <label class="osr" for="password">Sua senha</label>
         <input
           class="outlined"
