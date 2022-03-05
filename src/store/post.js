@@ -5,18 +5,23 @@ export const postStore = Vue.reactive({
   posts: [],
   isLoading: false,
   async getPosts() {
+    let finalArray = []
     this.isLoading = true
     
     const querySnapshot = await getDocs(collection(db, "posts"))
     
     await Promise.all([
       querySnapshot.forEach((doc) => {
-        this.posts.push({
+        finalArray.push({
           ...doc.data(),
           id: doc.id
         })
       })
     ])
+    
+    if (finalArray !== this.posts) {
+      this.posts = finalArray
+    }
     
     this.isLoading = false
   }

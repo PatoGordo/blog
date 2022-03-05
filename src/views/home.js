@@ -13,9 +13,9 @@ export class Home {
   
   template = `
     <div class="home">
-      <h2 class="title">{{ postStore.isLoading? 'Carregando posts...' : 'Ultimos posts' }}</h2>
+      <h2 class="title">{{ postStore.isLoading && !postStore.posts.length? 'Carregando posts...' : 'Ultimos posts' }}</h2>
       
-      <section class="container center" v-if="!postStore.isLoading">
+      <section class="container center" v-if="!postStore.isLoading && postStore.posts.length">
         <div v-for="post in postStore.posts" class="card">
           <header>
             <h3>{{ post.title }}</h3>
