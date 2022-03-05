@@ -83,13 +83,9 @@ export const authStore = Vue.reactive({
     }
   },
   getCurrentUser(cb = null) {
-    function setUser(user) {
-      this.user = user
-    }
-
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUser(user)
+        authStore.user = user
         if (cb) {
           cb()
         }

@@ -9,9 +9,7 @@ export class App {
   }
 
   mounted() {
-    Vue.onBeforeMount(() => {
-      authStore.getCurrentUser()
-    })
+    authStore.getCurrentUser()
     
     analytics(app)
     
