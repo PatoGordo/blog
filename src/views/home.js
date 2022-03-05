@@ -1,43 +1,35 @@
+import { postStore } from "../store/post.js"
+
 export class Home {
   setup() {
-    const isDark = Vue.ref(localStorage.getItem("theme") === "dark" ? true : false)
-    const router = VueRouter.useRouter()
-
-    function changeTheme() {
-      isDark.value = !isDark.value
-      const html = document.querySelector("html")
-
-      html.classList.add("theme-change")
-
-      if (html.className.includes("dark")) {
-        html.classList.remove("dark")
-        html.classList.remove("dark-navbar")
-        localStorage.setItem("theme", "light")
-      } else {
-        html.classList.add("dark")
-        html.classList.add("dark-navbar")
-        localStorage.setItem("theme", "dark")
-      }
-    }
-
+    Vue.onBeforeMount(async () => {
+      await postStore.getPosts()
+    })
+    
     return {
-      isDark,
-      changeTheme,
+      postStore
     }
   }
-
+  
   template = `
     <div class="home">
-      <div class="container row center" style="justify-content: space-between !important; margin-bottom: 16px;">
-        <label for="theme"><strong>Dark mode</strong></label>
-        <label class="switch">
-          <input id="theme" @click="changeTheme" v-model="isDark" type="checkbox">
-          <span class="slider rounded c-purple"></span>
-        </label>
-      </div>
-
-      <router-link to="/sign-in">Logar</router-link>
-      <router-link to="/profile">Ver perfil</router-link>
+      <h2 class="title">{{ postStore.isLoading? 'Carregando posts...' : 'Ultimos posts' }}</h2>
+      
+      <section class="container center" v-if="!postStore.isLoading">
+        <div v-for="post in postStore.posts" class="card">
+          <header>
+            <h3>{{ post.title }}</h3>
+            <small>Postado em: {{ new Date(post.created_at.seconds * 1000).toLocaleString() }}</small>
+          </header>
+          <main>
+            <img :src="post.cover" alt="Post image">
+            <p>{{ post.description }}</p>
+          </main>
+          <footer>
+            <router-link to="'/post/'+post.id">Ler mais</router-link>
+          </footer>
+        </div>
+      </section>
     </div>
   `
 }
