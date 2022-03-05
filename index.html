@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Vue 3 CDN application architecture</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Vue Libraries -->
+  <script src="./cdn_modules/vue@3.2.31/vue.global.prod.min.js"></script>
+  <script src="./cdn_modules/vue-router@4.0.12/vue-router.global.prod.min.js"></script>
+
+  <!-- Icon Provider -->
+  <script src="./cdn_modules/iconify@2.1.2/iconify.min.js"></script>
+
+  <!-- Less Css Configuration -->
+  <script>
+    less = { env: "production", async: false, fileAsync: false, poll: 1000, useFileCache: true }
+  </script> 
+  <link rel="stylesheet/less" type="text/css" href="src/styles/global.less" />
+  <script src="./cdn_modules/less/less.min.js"></script>
+  <link rel="stylesheet" href="https://my-ui-ten.vercel.app/dist/lib.css">
+</head>
+
+<body>
+  <div id="app" class="container h-center"></div>
+
+  <!-- Project -->
+  <script src="src/main.js" type="module"></script>
+</body>
+
+</html>
