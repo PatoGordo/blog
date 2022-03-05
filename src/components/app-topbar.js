@@ -25,7 +25,7 @@ export class AppTopbar {
         <li><router-link to="/about">Sobre</router-link></li>
         <li><router-link to="/settings">Configurações</router-link></li>
         <li><router-link to="/about">{{ authStore.user ? 'Perfil' : 'Entrar' }}</router-link></li>
-        <li><a href="https://github.com/PatoGordo/vue-3-cdn-architecture">Github</a></li>
+        <li><a href="https://github.com/PatoGordo/blog">Github</a></li>
       </ul>
       
       <span @click="isOpen = !isOpen" class="toggler">
@@ -38,7 +38,7 @@ export class AppTopbar {
       <li><router-link to="/about">Sobre</router-link></li>
       <li><router-link to="/settings">Configurações</router-link></li>
       <li><router-link to="/sign-in">{{ authStore.user ? 'Perfil' : 'Entrar' }}</router-link></li>
-      <li><a href="https://github.com/PatoGordo/vue-3-cdn-architecture">Github</a></li>
+      <li><a href="https://github.com/PatoGordo/blog">Github</a></li>
     </ul>
   `
 }
