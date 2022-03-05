@@ -14,7 +14,7 @@ export class AppTopbar {
       </span>
       
       <h1>
-        Vue 3 App
+        PatoGordo Blog
       </h1>
       
       <ul class="content">

@@ -1,8 +1,5 @@
-import { store } from "../store/main.js"
-
 export class Home {
   setup() {
-    const name = Vue.ref("")
     const isDark = Vue.ref(localStorage.getItem("theme") === "dark" ? true : false)
     const router = VueRouter.useRouter()
 
@@ -23,16 +20,9 @@ export class Home {
       }
     }
 
-    function handleHello() {
-      router.push(`/hello/${name.value}`)
-    }
-
     return {
       isDark,
       changeTheme,
-      handleHello,
-      name,
-      store
     }
   }
 
@@ -46,25 +36,7 @@ export class Home {
         </label>
       </div>
 
-      <h2 class="title">You clicked {{ store.count }} times!</h2>
-      
-      <button class="outlined border-purple" @click="store.increment()">Click here</button>
-      
-      <form style="margin-top: 16px" class="container" @submit.prevent="handleHello">
-        <h2 class="sub-title">Recieve a hello</h2>
-        
-        <label class="osr" for="name">What is your name?</label>
-        <input
-          id="name"
-          class="outlined"
-          placeholder="What is your name?"
-          type="text"
-          v-model="name"
-          required
-        />
-        
-        <button class="outlined border-purple half" type="submit">Submit</button>
-      </form>
+      <router-link to="/sign-in">Logar</router-link>
     </div>
   `
 }
