@@ -71,12 +71,18 @@ export const authStore = Vue.reactive({
   },
   async signOut(cb = null) {
     try {
-      await signOut(auth)
+      const reallySignOut = confirm("Você realmente deseja encerrar a sessão?")
 
-      this.user = null
+      if (!reallySignOut) {
+        return
+      } else {
+        await signOut(auth)
 
-      if (cb) {
-        cb()
+        this.user = null
+
+        if (cb) {
+          cb()
+        }
       }
     } catch (err) {
       alert(err.message)
