@@ -5,8 +5,14 @@ export class SignIn {
     const isSignIn = Vue.ref(true)
     const router = VueRouter.useRouter()
     
+    Vue.onBeforeMount(() => {
+      if (authStore.user) {
+        router.push('/profile')
+      }
+    })
+    
     function afterSignIn() {
-      router.push('/about')
+      router.push('/profile')
     }
     
     async function signInOrUp() {

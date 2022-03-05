@@ -1,4 +1,4 @@
-import { signInWithPopup, updateProfile, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js"
+import { signOut, onAuthStateChanged, signInWithPopup, updateProfile, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js"
 import { auth } from "../firebase.js"
 
 const googleProvider = new GoogleAuthProvider()
@@ -15,7 +15,6 @@ export const authStore = Vue.reactive({
       const user = result.user
 
       this.user = user
-      alert(user.displayName)
 
       if (cb) {
         cb()
@@ -30,7 +29,6 @@ export const authStore = Vue.reactive({
       const user = result.user
 
       this.user = user
-      alert(user.displayName)
 
       if (cb) {
         cb()
@@ -44,8 +42,8 @@ export const authStore = Vue.reactive({
       if (cb) {
         const result = await signInWithEmailAndPassword(auth, this.email, this.password)
         const user = result.user
+
         this.user = user
-        alert(user.displayName)
 
         cb()
       }
@@ -62,9 +60,20 @@ export const authStore = Vue.reactive({
 
       const user = { ...result.user, displayName: this.displayName }
 
-
       this.user = user
-      alert(user.displayName)
+
+      if (cb) {
+        cb()
+      }
+    } catch (err) {
+      alert(err.message)
+    }
+  },
+  async signOut(cb = null) {
+    try {
+      await signOut(auth)
+
+      this.user = null
 
       if (cb) {
         cb()
@@ -74,8 +83,17 @@ export const authStore = Vue.reactive({
     }
   },
   getCurrentUser(cb = null) {
-    if (cb) {
-      cb()
+    function setUser(user) {
+      this.user = user
     }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user)
+        if (cb) {
+          cb()
+        }
+      }
+    })
   }
 })

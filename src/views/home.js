@@ -37,6 +37,7 @@ export class Home {
       </div>
 
       <router-link to="/sign-in">Logar</router-link>
+      <router-link to="/profile">Ver perfil</router-link>
     </div>
   `
 }

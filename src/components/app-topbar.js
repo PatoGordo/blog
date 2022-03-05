@@ -13,7 +13,7 @@ export class AppTopbar {
         <span class="iconify icon" data-icon="akar-icons:arrow-left"></span>
       </span>
       
-      <h1>
+      <h1 @click="$router.push('/')">
         PatoGordo Blog
       </h1>
       

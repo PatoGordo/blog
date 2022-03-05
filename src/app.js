@@ -1,13 +1,20 @@
 import { AppTopbar } from "./components/app-topbar.js"
 import { app, analytics } from "./firebase.js"
 
+import { authStore } from "./store/auth.js"
+
 export class App {
   components = {
     'app-topbar': new AppTopbar()
   }
 
   mounted() {
+    Vue.onBeforeMount(() => {
+      authStore.getCurrentUser()
+    })
+    
     analytics(app)
+    
     const html = document.querySelector("html")
 
     if (localStorage.getItem("theme") === "dark") {
