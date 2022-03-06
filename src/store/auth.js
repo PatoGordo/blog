@@ -9,6 +9,7 @@ export const authStore = Vue.reactive({
   password: '',
   displayName: '',
   user: null,
+  haveUser: false,
   canCreatePosts: false,
   async signInWithGoogle(cb = null) {
     try {
@@ -16,7 +17,8 @@ export const authStore = Vue.reactive({
       const user = result.user
 
       this.user = user
-      
+      this.haveUser = true
+
       if (user.uid === "1DA3osrsytSVEZLErON6jhQxjO72" || user.uid == "oTbWyKZAh8VyzzTJ6UuS4YP3Iea2") {
         this.canCreatePosts = true
       }
@@ -34,6 +36,7 @@ export const authStore = Vue.reactive({
       const user = result.user
 
       this.user = user
+      this.haveUser = true
 
       if (user.uid === "1DA3osrsytSVEZLErON6jhQxjO72" || user.uid == "oTbWyKZAh8VyzzTJ6UuS4YP3Iea2") {
         this.canCreatePosts = true
@@ -53,7 +56,8 @@ export const authStore = Vue.reactive({
         const user = result.user
 
         this.user = user
-        
+        this.haveUser = true
+
         if (user.uid === "1DA3osrsytSVEZLErON6jhQxjO72" || user.uid == "oTbWyKZAh8VyzzTJ6UuS4YP3Iea2") {
           this.canCreatePosts = true
         }
@@ -74,7 +78,8 @@ export const authStore = Vue.reactive({
       const user = { ...result.user, displayName: this.displayName }
 
       this.user = user
-      
+      this.haveUser = true
+
       if (user.uid === "1DA3osrsytSVEZLErON6jhQxjO72" || user.uid == "oTbWyKZAh8VyzzTJ6UuS4YP3Iea2") {
         this.canCreatePosts = true
       }
@@ -96,6 +101,7 @@ export const authStore = Vue.reactive({
         await signOut(auth)
 
         this.user = null
+        this.haveUser = false
 
         if (cb) {
           cb()
@@ -109,11 +115,12 @@ export const authStore = Vue.reactive({
     onAuthStateChanged(auth, (user) => {
       if (user) {
         authStore.user = user
-        
+        this.haveUser = true
+
         if (user.uid === "1DA3osrsytSVEZLErON6jhQxjO72" || user.uid == "oTbWyKZAh8VyzzTJ6UuS4YP3Iea2") {
           authStore.canCreatePosts = true
         }
-        
+
         if (cb) {
           cb()
         }

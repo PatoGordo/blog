@@ -18,8 +18,8 @@ export class Post {
       commentStore.addComment(id)
     }
     
-    async function deleteComment(id) {
-      await commentStore.deleteComment(id)
+    async function deleteComment(id, index) {
+      await commentStore.deleteComment(id, index)
     }
 
     return {
@@ -47,23 +47,35 @@ export class Post {
         <li v-for="reference in post?.references"><a :href="reference.url" target="_blank">{{ reference.description }}</a></li>
       </ul>
       
-      <form @submit.prevent="addComment" class="container" style="margin-top: 16px;">
+      <form @submit.prevent="addComment" class="container" style="margin: 16px 0;">
         <label class="osr" for="content">Seu comentário</label>
         <textarea
           id="content"
           placeholder="Seu comentário"
           class="outlined"
           v-model="commentStore.content"
+          :disabled="!authStore.haveUser"
           required
         ></textarea>
         
-        <button class="outlined half border-blue" type="submit">Adicionar comentário</button>
+        <button class="outlined half border-blue" type="submit" :disabled="!authStore.haveUser">Adicionar comentário</button>
+        
+        <div v-if="!authStore.haveUser" class="container row h-end v-center" style="margin-top: 16px;">
+          <strong>Faça login para comentar</strong>
+          <button @click="authStore.signInWithGoogle()" type="button" class="container center rounded" style="width: 45px; height: 45px;">
+            <span class="iconify icon c-white" data-icon="flat-color-icons:google"></span>
+          </button>
+          
+          <button @click="authStore.signInWithGithub()" type="button" class="bg-black container center rounded" style="width: 45px; height: 45px;">
+            <span class="iconify icon c-white" data-icon="akar-icons:github-fill"></span>
+          </button>
+        </div>
       </form>
       
       <section class="container">
         <strong v-if="!commentStore.comments.length">Ainda não tem cometários</strong>
         
-        <div v-if="commentStore.comments.length" v-for="comment in commentStore.comments" class="container distance comment">
+        <div v-if="commentStore.comments.length" v-for="(comment, index) in commentStore.comments" class="container distance comment">
           <header class="container row">
             <img :src="comment.photoURL" :alt="comment.displayName + ' foto de perfil'" />
             <strong>{{ comment.displayName }}</strong>
@@ -71,7 +83,7 @@ export class Post {
           <p>{{ comment.content }}</p>
           
           <footer v-if="authStore?.user?.uid === comment?.uid" class="container h-end v-center">
-           <span @click="deleteComment(comment.id)"><span class="iconify icon c-red" data-icon="akar-icons:trash-bin"></span></span>
+           <span @click="deleteComment(comment.id, index)"><span class="iconify icon c-red" data-icon="akar-icons:trash-bin"></span></span>
           </footer>
         </div>
       </section>

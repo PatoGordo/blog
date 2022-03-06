@@ -51,8 +51,9 @@ export const commentStore = Vue.reactive({
 
     this.content = ''
   },
-  async deleteComment(id) {
+  async deleteComment(id, index) {
     await deleteDoc(doc(db, "comments", id))
-    this.comments = this.comments.map(comment => comment.id !== id)
+    
+    this.comments.splice(index, 1)
   }
 })
