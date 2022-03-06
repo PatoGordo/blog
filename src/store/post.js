@@ -81,7 +81,6 @@ export const postStore = Vue.reactive({
 Vue.watch(
   () => postStore.newPost,
   (val) => {
-    console.log(val);
     localStorage.setItem('draft', JSON.stringify(val))
   }, { deep: true }
 )

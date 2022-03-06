@@ -52,7 +52,6 @@ export const commentStore = Vue.reactive({
     this.content = ''
   },
   async deleteComment(id) {
-    console.log(id);
     await deleteDoc(doc(db, "comments", id))
     this.comments = this.comments.map(comment => comment.id !== id)
   }
