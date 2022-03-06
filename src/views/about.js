@@ -1,10 +1,10 @@
 export class About {
   template = `
     <div>
-      <h2 class="title">About project</h2>
-      <p>This is a open source template, made with focus on helping who program in a cell phone.</p>
+      <h2 class="title">Sobre o projeto</h2>
+      <p>Esse blog foi inicialmente apenas um teste da My UI, porem acabou se tornando um projeto real.</p>
       
-      <h3 class="sub-title">Technologies</h3>
+      <h3 class="sub-title">Stack</h3>
       <ul>
         <li>Vue 3</li>
         <li>Vue Router 4</li>
@@ -13,8 +13,8 @@ export class About {
         <li>My UI (<a href="https://github.com/PatoGordo/my-ui" target="_blank">github.com/PatoGordo/my-ui</a>)</li>
       </ul>
       
-      <h3 class="sub-title">Project repository</h3>
-      <a href="https://github.com/PatoGordo/vue-3-cdn-architecture" target="_blank">Click here to access the source code</>
+      <h3 class="sub-title">Código fonte</h3>
+      <a href="https://github.com/PatoGordo/blog" target="_blank">github.com/PatoGordo/blog</a>
     </div>
   `
 }
