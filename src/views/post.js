@@ -65,7 +65,7 @@ export class Post {
         
         <div v-if="commentStore.comments.length" v-for="comment in commentStore.comments" class="container distance comment">
           <header class="container row">
-            <img :src="comment.photoURL" :alt="comment.displayName + ' profile picture'" />
+            <img :src="comment.photoURL" :alt="comment.displayName + ' foto de perfil'" />
             <strong>{{ comment.displayName }}</strong>
           </header>
           <p>{{ comment.content }}</p>
