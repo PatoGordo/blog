@@ -9,12 +9,17 @@ export const authStore = Vue.reactive({
   password: '',
   displayName: '',
   user: null,
+  canCreatePosts: false,
   async signInWithGoogle(cb = null) {
     try {
       const result = await signInWithPopup(auth, googleProvider)
       const user = result.user
 
       this.user = user
+      
+      if (user.uid === "1DA3osrsytSVEZLErON6jhQxjO72" || user.uid == "oTbWyKZAh8VyzzTJ6UuS4YP3Iea2") {
+        this.canCreatePosts = true
+      }
 
       if (cb) {
         cb()
@@ -30,6 +35,10 @@ export const authStore = Vue.reactive({
 
       this.user = user
 
+      if (user.uid === "1DA3osrsytSVEZLErON6jhQxjO72" || user.uid == "oTbWyKZAh8VyzzTJ6UuS4YP3Iea2") {
+        this.canCreatePosts = true
+      }
+
       if (cb) {
         cb()
       }
@@ -44,6 +53,10 @@ export const authStore = Vue.reactive({
         const user = result.user
 
         this.user = user
+        
+        if (user.uid === "1DA3osrsytSVEZLErON6jhQxjO72" || user.uid == "oTbWyKZAh8VyzzTJ6UuS4YP3Iea2") {
+          this.canCreatePosts = true
+        }
 
         cb()
       }
@@ -61,6 +74,10 @@ export const authStore = Vue.reactive({
       const user = { ...result.user, displayName: this.displayName }
 
       this.user = user
+      
+      if (user.uid === "1DA3osrsytSVEZLErON6jhQxjO72" || user.uid == "oTbWyKZAh8VyzzTJ6UuS4YP3Iea2") {
+        this.canCreatePosts = true
+      }
 
       if (cb) {
         cb()
@@ -92,6 +109,11 @@ export const authStore = Vue.reactive({
     onAuthStateChanged(auth, (user) => {
       if (user) {
         authStore.user = user
+        
+        if (user.uid === "1DA3osrsytSVEZLErON6jhQxjO72" || user.uid == "oTbWyKZAh8VyzzTJ6UuS4YP3Iea2") {
+          authStore.canCreatePosts = true
+        }
+        
         if (cb) {
           cb()
         }

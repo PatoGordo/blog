@@ -10,7 +10,7 @@
 .mobile-content {
   position: absolute;
   top: -300px;
-  height: 320px;
+  height: 340px;
   list-style: none;
   transition: all 300ms;
   z-index: 1;
@@ -36,9 +36,31 @@
 }
 
 .navbar.open {
-  margin-bottom: 336px;
+  margin-bottom: 356px;
 }
 
 .page {
   width: min(510px, 100%) !important;
+}
+
+.comment {
+  background: #ededed;
+  border-radius: 4px;
+  header {
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 8px;
+    img {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+}
+
+body.dark {
+  .comment {
+    background: #42445A;
+  }
 }
